@@ -1,4 +1,5 @@
 var dsturl1 = 'https://etk.srail.kr/hpg/hra/01/selectScheduleList.do?pageId=TK0101010000'
+var available_button_label = '예약하기'
 
 window.showModalDialog = window.showModalDialog || function(url, arg, opt) {
 	window.open(url, arg, opt);
@@ -147,7 +148,8 @@ if (document.URL.substring(0, dsturl1.length) == dsturl1) {
 						if (coachSpecials.length != 0) {
 							for (j = 0; j < coachSpecials.length; j++) {
 								name = $(coachSpecials[j]).attr('class');
-								if (name == 'btn_small btn_burgundy_dark val_m wx90') {
+                                                buttonLabel = $(coachSpecials[j]).find('span').text();
+								if (name == 'btn_small btn_burgundy_dark val_m wx90' && buttonLabel == available_button_label) {
 									$(coachSpecials[0])[0].click();
 									succeed = true;
 									break;
@@ -162,7 +164,8 @@ if (document.URL.substring(0, dsturl1.length) == dsturl1) {
 						if (firstSpecials.length != 0) {
 							for (j = 0; j < firstSpecials.length; j++) {
 								name = $(firstSpecials[j]).attr('class');
-								if (name == 'btn_small btn_burgundy_dark val_m wx90') {
+                                                buttonLabel = $(coachSpecials[j]).find('span').text();
+								if (name == 'btn_small btn_burgundy_dark val_m wx90' && buttonLabel == available_button_label) {
 									$(firstSpecials[0])[0].click();
 									succeed = true;
 									break;
@@ -177,6 +180,7 @@ if (document.URL.substring(0, dsturl1.length) == dsturl1) {
 						if (waitingSpecials.length != 0) {
 							for (j = 0; j < waitingSpecials.length; j++) {
 								name = $(waitingSpecials[j]).attr('class');
+                                                buttonLabel = $(coachSpecials[j]).find('span').text();
 								if (name == 'btn_small btn_burgundy_dark val_m wx90') {
 									$(waitingSpecials[0])[0].click();
 									succeed = true;
