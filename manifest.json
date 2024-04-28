@@ -6,15 +6,25 @@
   "host_permissions": [
     "https://etk.srail.kr/"
   ],
+  "permissions": [
+    "activeTab", // Add any necessary permissions here
+    "storage"
+  ],
   "icons": {
-      "128": "images/icon128.png"
+    "128": "images/icon128.png"
   },
-  "content_scripts": [ {
-    "all_frames": true,
-    "js": ["jquery-1.11.3.min.js", "content.js"],
-    "matches": ["https://etk.srail.kr/*"],
-    "run_at": "document_end"
-  }],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://etk.srail.kr/*"
+      ],
+      "js": [
+        "jquery-1.11.3.min.js",
+        "content.js"
+      ],
+      "run_at": "document_end"
+    }
+  ],
   "background": {
     "service_worker": "background.js"
   },
@@ -25,7 +35,7 @@
     }
   ],
   "options_ui": {
-    "page": "options.html",
-    "open_in_tab": false
+    "page": "options.html"
   }
 }
+

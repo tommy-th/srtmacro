@@ -1,6 +1,19 @@
 var dsturl1 = 'https://etk.srail.kr/hpg/hra/01/selectScheduleList.do?pageId=TK0101010000'
 var available_button_label = '예약하기'
 
+function playSound() {
+      let audio = new Audio(chrome.extension.getURL('assets/tada.mp3'));
+      audio.play();
+}
+
+chrome.runtime.onMessage.addListener(function(message, sender, sendResponse) {
+    if (message && message.type == 'playSound') {
+            playSound();
+            sendMessageToTelegram();
+        sendResponse(true);
+    }
+});
+
 window.showModalDialog = window.showModalDialog || function(url, arg, opt) {
 	window.open(url, arg, opt);
 };
@@ -164,7 +177,7 @@ if (document.URL.substring(0, dsturl1.length) == dsturl1) {
 						if (firstSpecials.length != 0) {
 							for (j = 0; j < firstSpecials.length; j++) {
 								name = $(firstSpecials[j]).attr('class');
-                                                buttonLabel = $(coachSpecials[j]).find('span').text();
+                                                buttonLabel = $(firstSpecials[j]).find('span').text();
 								if (name == 'btn_small btn_burgundy_dark val_m wx90' && buttonLabel == available_button_label) {
 									$(firstSpecials[0])[0].click();
 									succeed = true;
@@ -180,7 +193,7 @@ if (document.URL.substring(0, dsturl1.length) == dsturl1) {
 						if (waitingSpecials.length != 0) {
 							for (j = 0; j < waitingSpecials.length; j++) {
 								name = $(waitingSpecials[j]).attr('class');
-                                                buttonLabel = $(coachSpecials[j]).find('span').text();
+                                                buttonLabel = $(waitingSpecials[j]).find('span').text();
 								if (name == 'btn_small btn_burgundy_dark val_m wx90') {
 									$(waitingSpecials[0])[0].click();
 									succeed = true;
@@ -210,7 +223,7 @@ if (document.URL.substring(0, dsturl1.length) == dsturl1) {
 				} else {
 					setTimeout(function() {
 					location.reload();
-					}, 1000);
+					}, 10000);
 				}
 			} else {
 				history.go(-1);
