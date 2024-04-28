@@ -222,7 +222,14 @@ if (document.URL.substring(0, dsturl1.length) == dsturl1) {
 					//document.querySelector('.ui-dialog-buttonset').querySelector('.ui-button').click();
 				} else {
 					setTimeout(function() {
-					location.reload();
+						// 모두 매진시 조회하기 먼저 클릭
+						const inquiryButton = document.querySelector('.btn_large');
+						if (inquiryButton) {
+						    inquiryButton.click();
+						} else {
+						    console.error('조회하기 button not found.');
+						}
+						location.reload();
 					}, 10000);
 				}
 			} else {
